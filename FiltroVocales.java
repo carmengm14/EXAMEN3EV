@@ -15,36 +15,35 @@ public class FiltroVocales {
     public static void main(String[] args) throws IOException {
         FileReader lector = new FileReader("ficheroFiltroVocales.txt");
         int longitud = lector.read();
-        char letra = (char)longitud;
+        char letra = (char) longitud;
 
         File ficheroSalida = new File("ficheroFiltroVocales.filtrado");
         FileWriter writer = new FileWriter(ficheroSalida);
-     
+
         for (int i = 0; i <= longitud; i++) {
             if (esVocal(letra) == true) {
-                
-            }else{
+
+            } else {
                 writer.write(i);
             }
         }
         writer.close();
         lector.close();
     }
-    public static boolean esVocal(char caracter){
+
+    public static boolean esVocal(char caracter) {
         if (caracter == 'a') {
             return true;
-        }else if  (caracter == 'e'){
+        } else if (caracter == 'e') {
             return true;
-        }else if (caracter == 'i'){
+        } else if (caracter == 'i') {
             return true;
-        }else if (caracter == 'o'){
+        } else if (caracter == 'o') {
             return true;
-        }else if (caracter == 'u'){
+        } else if (caracter == 'u') {
             return true;
-        }else{
+        } else {
             return false;
         }
-        }
- }
-
-
+    }
+}
