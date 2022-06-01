@@ -22,25 +22,29 @@ public class FiltroVocales {
      
         for (int i = 0; i <= longitud; i++) {
             if (esVocal(letra) == true) {
-                writer.write(i + "\n");
+                
+            }else{
+                writer.write(i);
             }
         }
         writer.close();
         lector.close();
     }
-    public static char esVocal(char caracter){
-        if (caracter == 'á') {
-            return 'a';
-        }else if  (caracter == 'é'){
-            return 'e';
-        }else if (caracter == 'í'){
-            return 'i';
-        }else if (caracter == 'ó'){
-            return 'o';
-        }else if (caracter == 'ú'){
-            return 'u';
+    public static boolean esVocal(char caracter){
+        if (caracter == 'a') {
+            return true;
+        }else if  (caracter == 'e'){
+            return true;
+        }else if (caracter == 'i'){
+            return true;
+        }else if (caracter == 'o'){
+            return true;
+        }else if (caracter == 'u'){
+            return true;
+        }else{
+            return false;
         }
         }
-    }
+ }
 
-}
+
