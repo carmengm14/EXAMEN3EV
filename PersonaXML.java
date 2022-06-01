@@ -20,10 +20,8 @@ import org.w3c.dom.*;
 import org.w3c.dom.Node;
 
 public class PersonaXML extends Persona implements GenerableXML {
-
     public PersonaXML(String nombre, String apellidos, int edad, String dni, String domicilio) {
         super(nombre, apellidos, edad, dni, domicilio);
-
     }
 
     /**
@@ -38,51 +36,50 @@ public class PersonaXML extends Persona implements GenerableXML {
      * @throws TransformerException
      * @throws ClassNotFoundException
      */
+   
 
 
     public void generarXML() throws IOException, ClassNotFoundException, ParserConfigurationException, TransformerException {
         // Leemos el fichero con los objetos que queremos poner en el XML
         ObjectInputStream fichero = new ObjectInputStream(
-                new FileInputStream("controles/control04/CLIENTES2copia.dat"));
+                new FileInputStream("persona.persona"));
         // Creamos el doc que empezara con el nodo raiz
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-        Element clientes = doc.createElement("clientes");
-        doc.appendChild(clientes);
+        Element personas = (Element) doc.createElement("personas");
+        doc.appendChild((Node) personas);
         // creamos la variable cliente donde iremos metiendo los clientes 1 a 1
-        Cliente cliente;
+        Persona persona;
 
         try {
             while (true) {
                 // Leemos los datos del fichero que hemos cogido anteriormente y lo guardamos en
-                // cliente
-                cliente = (Cliente) fichero.readObject();
+                persona = (Persona) fichero.readObject();
 
                 // creamos el nombre del nodo padre , y le ponemos un atributo al cual le
                 // ponemos texto (El id en este caso)
-                Element cliElement = doc.createElement("cliente");
-                cliElement.setAttribute("id", Integer.toString(cliente.getId()));
+                Element perElement = (Element) doc.createElement("persona");
 
                 // creamos los hijos del nodo padre y les ponemos texto, luego los añadiremos al
                 // nodo padre para decir que son hijos de ese nodo y no de otro padre
-                Element hijo = doc.createElement("nombre");
-                hijo.appendChild(doc.createTextNode(cliente.getNombre()));
-                cliElement.appendChild(hijo);
+                Element hijo = (Element) doc.createElement("nombre");
+                ((Node) hijo).appendChild(doc.createTextNode(persona.getNombre()));
+                ((Node) perElement).appendChild((Node) hijo);
 
-                Element hijo2 = doc.createElement("apellidos");
-                hijo2.appendChild(doc.createTextNode(cliente.getApellidos()));
-                cliElement.appendChild(hijo2);
+                Element hijo2 = (Element) doc.createElement("apellidos");
+                ((Node) hijo2).appendChild(doc.createTextNode(persona.getApellidos()));
+                ((Node) perElement).appendChild((Node) hijo2);
 
-                Element hijo3 = doc.createElement("nif");
-                hijo3.appendChild(doc.createTextNode(cliente.getNif()));
-                cliElement.appendChild(hijo3);
+                Element hijo3 = (Element) doc.createElement("dni");
+                ((Node) hijo3).appendChild(doc.createTextNode(persona.getDni()));
+                ((Node) perElement).appendChild((Node) hijo3);
 
-                Element hijo4 = doc.createElement("email");
-                hijo4.appendChild(doc.createTextNode(cliente.getEmail()));
-                cliElement.appendChild(hijo4);
+                Element hijo4 = (Element) doc.createElement("domicilio");
+                ((Node) hijo4).appendChild(doc.createTextNode(persona.getDomicilio()));
+                ((Node) perElement).appendChild((Node) hijo4);
 
                 // Guarda todos los nodos del cliente creado y asi cuando pase al siguiente
                 // cliente se mantendran almacenados en vez de superponerse
-                clientes.appendChild(cliElement);
+                ((Node) personas).appendChild((Node) perElement);
             }
         } catch (EOFException eof) {
             // TODO: handle exception
@@ -92,7 +89,7 @@ public class PersonaXML extends Persona implements GenerableXML {
         // escribir todo lo que hayamos hecho anteriormente.
         Transformer transformador = TransformerFactory.newInstance().newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult resultado = new StreamResult(new FileOutputStream("controles/control04/CLIENTESXML.dat"));
+        StreamResult resultado = new StreamResult(new FileOutputStream(getApellidos() + ""+ getEdad()+".xml"));
 
         transformador.transform(source, resultado);
     }

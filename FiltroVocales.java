@@ -23,7 +23,6 @@ public class FiltroVocales {
         for (int i = 0; i <= longitud; i++) {
             if (esVocal(letra) == true) {
                 writer.write(i + "\n");
-                
             }
         }
         writer.close();
