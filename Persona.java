@@ -1,3 +1,9 @@
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 /**
  * Crea una clase "Persona" con los siguientes atributos:
  * 
@@ -93,11 +99,22 @@ public class Persona {
      * * Crea un método "serializar" que escriba el objeto serializado en un fichero
      * * cuyo nombre debe ser el resultado de unir nombre y apellidos sin espacios. El
      * * fichero también tiene que tener una extensión ".persona".
+     * @throws IOException
      */
 
-     public void serializar(){
-         
+     public void serializar() throws IOException{
+        File file = new File("persona.persona");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        try (DataOutputStream writer = new DataOutputStream(
+            new FileOutputStream(file));
+            ObjectOutputStream salida = new ObjectOutputStream(writer)){
+                    salida.writeObject(getNombre()+""+ getApellidos());   
+                writer.close();
+        } catch (Exception e) {
+        // TODO: handle exception
+            System.out.println(e.getLocalizedMessage());
+        }
      }
-
-
 }
