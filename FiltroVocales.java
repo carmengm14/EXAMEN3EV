@@ -24,7 +24,7 @@ public class FiltroVocales {
             if (esVocal(letra) == true) {
 
             } else {
-                writer.write(i);
+                writer.write((char)i);
             }
         }
         writer.close();
