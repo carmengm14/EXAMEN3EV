@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Crea un fichero "DobleByte.java"
@@ -12,9 +13,12 @@ import java.io.IOException;
  */
 public class DobleByte {
     public static void main(String[] args) throws IOException {
-
+        Scanner sc = new Scanner(System.in);
+        System.out.println("EScribe el nombre del fichero = ");
+        String nombreFich = sc.nextLine();
+        sc.close();
         try {
-            FileInputStream leerFichero = new FileInputStream("ficheroDoubleByte.txt");
+            FileInputStream leerFichero = new FileInputStream(nombreFich);
             FileOutputStream escribirFichero = new FileOutputStream("ficheroDoubleByte.doble");
             int primerByte = leerFichero.read();
             while (primerByte != -1) {
