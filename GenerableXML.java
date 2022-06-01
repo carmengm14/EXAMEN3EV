@@ -1,4 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 
 /**
  * Crea una interfaz "GenerableXML" con el siguiente método:
@@ -18,5 +23,5 @@ import javax.xml.transform.TransformerException;
  * Crea la clase TestPersonaXML y prueba con un objeto.
  */
 public interface GenerableXML {
-    void generarXML() throws TransformerException;
+    void generarXML() throws TransformerException, FileNotFoundException, IOException, ParserConfigurationException, TransformerFactoryConfigurationError, ClassNotFoundException;
 }
