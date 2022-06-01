@@ -12,21 +12,21 @@ import java.io.IOException;
  * inalterado.
  */
 public class DobleByte {
-    public static void main(String[] args) throws IOException{
-        
+    public static void main(String[] args) throws IOException {
+
         try {
-            FileInputStream leerFichero = new FileInputStream("ficheroLectora.txt"); 
-            FileOutputStream escribirFichero = new FileOutputStream("ficheroLectora.doble");
+            FileInputStream leerFichero = new FileInputStream("ficheroDoubleByte.txt");
+            FileOutputStream escribirFichero = new FileOutputStream("ficheroDoubleByte.doble");
             int primerByte = leerFichero.read();
             while (primerByte != -1) {
-                escribirFichero.write((char)primerByte);
-                escribirFichero.write((char)primerByte);
+                escribirFichero.write((char) primerByte);
+                escribirFichero.write((char) primerByte);
                 primerByte = leerFichero.read();
             }
             leerFichero.close();
             escribirFichero.close();
         } catch (Exception e) {
-            //TODO: handle exception
+            // TODO: handle exception
             System.out.println(e.getLocalizedMessage());
         }
     }
